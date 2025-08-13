@@ -4,25 +4,12 @@
     <script src="js/aframe.min.js"></script>
     <script src="js/aframe-ar.js"></script>
 </head>
-<body style='margin : 0px; overflow: hidden;'>
-    <a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 4x4;'>
-
-        <a-marker type='pattern' url='patterns/01.patt'>
-            <a-box color='red' position='0 0.5 0' scale='0.5 0.5 0.5'></a-box>
-            <a-text value="Cubo Rojo" position="0 1 0" scale="0.7 0.7 0.7"></a-text>
-        </a-marker>
-
-       <!-- <a-marker type='pattern' url='patterns/02.patt'>
-            <a-sphere color='blue' position='0 0.5 0' scale='0.5 0.5 0.5'></a-sphere>
-            <a-text value="Esfera Azul" position="0 1 0" scale="0.7 0.7 0.7"></a-text>
-        </a-marker>
-
-        <a-marker type='pattern' url='patterns/03.patt'>
-            <a-plane src="imagen3.png" position='0 0.5 0' scale='1 1 1'></a-plane>
-            <a-text value="Plano con Imagen" position="0 1 0" scale="0.7 0.7 0.7"></a-text>
-        </a-marker> -->
-
-        <a-entity camera></a-entity>
+  <body style='margin : 0px; overflow: hidden;'>
+    <a-scene embedded arjs>
+      <a-marker type='pattern' url='patterns/01.patt'>
+          <a-box position='0 0.5 0' material='color: yellow;'></a-box>
+      </a-marker>
+      <a-entity camera></a-entity>
     </a-scene>
-</body>
+  </body>
 </html>
