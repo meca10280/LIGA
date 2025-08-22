@@ -5,29 +5,53 @@
   <script src="js/aframe.min.js"></script>
   <script src="js/aframe-ar.js"></script>
 </head>
-<body style='margin : 0px; overflow: hidden;'>
-    <a-scene embedded arjs>
+
+<body style="margin : 0px; overflow: hidden;">
+    <a-scene
+        arjs='sourceType: webcam; detectionMode: mono_and_matrix; patternRatio: 0.5; debugUIEnabled: false;'
+        embedded renderer='logarithmicDepthBuffer: true;'>
+
         <a-marker type='pattern' url='patterns/00.patt'>
-           <a-plane width="2" height="0.5" color="#52A52E"></a-plane>           
-          <a-entity text-geometry="value: 3D Text!; size: 1.5; height: 0.8;" material="color: blue" position="0 0.5 0"></a-entity>
+            <a-text
+                value="Hello World"
+                color="red"
+                align="center"
+                width="2"
+                position="0 0.5 0"
+                rotation="-90 0 0"></a-text>
         </a-marker>
-      
+
         <a-marker type='pattern' url='patterns/01.patt'>
-            <a-box color='red' position='0 0.5 0' scale='0.5 0.5 0.5'></a-box>
-            <a-text value="Cubo Rojo" position="0 1 0" scale="0.7 0.7 0.7"></a-text>
+            <a-text
+                value="Augmented Reality"
+                color="blue"
+                align="center"
+                width="2"
+                position="0 0.5 0"
+                rotation="-90 0 0"></a-text>
         </a-marker>
 
         <a-marker type='pattern' url='patterns/02.patt'>
-            <a-sphere color='blue' position='0 0.5 0' scale='0.5 0.5 0.5'></a-sphere>
-            <a-text value="Esfera Azul" position="0 1 0" scale="0.7 0.7 0.7"></a-text>
+            <a-text
+                value="Welcome to AR.js"
+                color="green"
+                align="center"
+                width="2"
+                position="0 0.5 0"
+                rotation="-90 0 0"></a-text>
         </a-marker>
 
-        <a-marker type='pattern' url='patterns/03.patt'>            
-            <a-entity gltf-model="url(gltf/astronauta/scene.gltf)"></a-entity>
-            <a-text value="Plano con Imagen" position="0 1 0" scale="0.7 0.7 0.7"></a-text>
+        <a-marker type='pattern' url='patterns/03.patt'>
+            <a-text
+                value="Check out the text!"
+                color="purple"
+                align="center"
+                width="2"
+                position="0 0.5 0"
+                rotation="-90 0 0"></a-text>
         </a-marker>
 
-        <a-entity camera></a-entity>
+        <a-camera-static/>
     </a-scene>
 </body>
 </html>
