@@ -41,7 +41,6 @@
     <div id="instructions">
         <h3>LIGA - Experiencia inmersiva</h3>
         <p>Apunte la c&aacute;mara hacia los marcadores para ver descripciones de los diferentes equipos del laboratorio.</p>
-        <p>Available markers: Hiro, Kanji, A, B, C, F</p>
     </div>
     
     <div id="markerInfo">
@@ -65,7 +64,7 @@
         </a-assets>
 
         <!-- Hiro Marker - Smartphone -->
-        <a-marker preset="hiro" id="hiro-marker">
+        <a-marker type="pattern" url="patterns/02.patt" id="hiro-marker">
             <a-entity id="smartphone-description" position="0 1 0">
                 <!-- 3D Phone Model -->
                 <a-box position="0 0.5 0" 
