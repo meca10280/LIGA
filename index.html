@@ -1,113 +1,384 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <title>LIGA - Experiencia inmersiva</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"> -->
+    <title>LIGA - Experiencia inmersiva</title>    
+    
+    <!-- A-Frame and AR.js libraries -->
     <script src="js/aframe.min.js"></script>
-    <script src="js/aframe-ar.js"></script>   
-  <style>
-    body { margin: 0; overflow: hidden; }
-    #info {
-      position: absolute;
-      bottom: 20px;
-      width: 100%;
-      text-align: center;
-      font-family: Arial, sans-serif;
-      font-size: 40px;
-      color: #fff;
-    }
-  </style>
-</head>
-<body>
-  <a-scene
-    embedded
-    arjs="sourceType: webcam; debugUIEnabled: false;"
-  >
-    <!-- Define multiple markers with distinct IDs -->
-    <!-- Example using pattern markers; for barcode markers, change accordingly -->
-    <a-marker id="marker1" type="pattern" url="patterns/00.patt" cursor="fuse" emitevents="true" registerevents>
-      <!-- Optional: 3D content here -->
-    </a-marker>
-
-    <a-marker id="marker2" type="pattern" url="patterns/01.patt" cursor="fuse" emitevents="true" registerevents>
-    </a-marker>
-
-    <a-marker id="marker3" type="pattern" url="patterns/02.patt" cursor="fuse" emitevents="true" registerevents>
-    </a-marker>
-
-    <!-- Text entity that updates based on focused marker -->
-    <a-entity
-      id="dynamic-text"
-      position="0 0.5 -1"
-      text="value: Hover over a marker; align: center; width: 4;"
-      geometry="primitive: plane; height: 0.3; width: 3;"
-      material="color: #222; opacity: 0.8;"
-      look-at="[camera]"
-    ></a-entity>
-
-    <!-- Camera -->
-    <a-entity camera></a-entity>
-  </a-scene>
-
-  <div id="info">Point your camera at a marker to see details.</div>
-
-  <script>
-    // JavaScript to handle marker events
-    document.addEventListener('DOMContentLoaded', () => {
-      const marker1 = document.querySelector('#marker1');
-      const marker2 = document.querySelector('#marker2');
-      const marker3 = document.querySelector('#marker3');
-
-      const dynamicText = document.querySelector('#dynamic-text');
-
-      // Define marker focus states
-      const markers = {
-        marker1: {
-          element: marker1,
-          name: 'Marker 1',
-          content: 'This is the content for Marker 1.',
-        },
-        marker2: {
-          element: marker2,
-          name: 'Marker 2',
-          content: 'Welcome to Marker 2 area.',
-        },
-        marker3: {
-          element: marker3,
-          name: 'Marker 3',
-          content: 'You are viewing Marker 3.',
+    <script src="js/aframe-ar.js"></script>
+    
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
         }
-      };
+        
+        #arjsDebugUIContainer {
+            display: none;
+        }
+        
+        .ar-text-panel {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .ar-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #FFD700;
+        }
+        
+        .ar-subtitle {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #87CEEB;
+        }
+        
+        .ar-description {
+            font-size: 14px;
+            line-height: 1.4;
+            color: #FFFFFF;
+        }
+    </style>
+</head>
 
-      // Helper function to update text
-      function updateText(content) {
-        // Use a dark background with white text
-        dynamicText.setAttribute('text', {
-          value: content,
-          align: 'center',
-          width: 4,
-        });
-        // Update background color of the plane geometry
-        dynamicText.setAttribute('material', {
-          color: '#222',
-          opacity: 0.8,
-        });
-      }
+<body>
+    <a-scene
+        embedded
+        arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
+        vr-mode-ui="enabled: false"
+        renderer="logarithmicDepthBuffer: true;"
+        gesture-detector>
+        
+        <a-assets>
+            <!-- Define reusable assets -->
+            <a-mixin id="text-panel" 
+                     geometry="primitive: plane; width: 3; height: 2"
+                     material="color: #000000; opacity: 0.8; transparent: true">
+            </a-mixin>
+        </a-assets>
 
-      // Add event listeners for marker detection
-      Object.values(markers).forEach(marker => {
-        marker.element.addEventListener('markerFound', () => {
-          // When marker is detected, update the text
-          updateText(marker.content);
+        <!-- Marker 1 - Hiro Pattern -->
+        <a-marker type="pattern" url="patterns/00.patt" id="marker-00">
+            <a-entity id="content-hiro" visible="false">
+                <!-- Dark background panel -->
+                <a-plane 
+                    position="0 0 0.01" 
+                    width="4" 
+                    height="2.5" 
+                    color="#000000" 
+                    opacity="0.85" 
+                    transparent="true">
+                </a-plane>
+                
+                <!-- Title -->
+                <a-text 
+                    value="HIRO MARKER" 
+                    position="0 0.8 0.02" 
+                    align="center" 
+                    color="#FFD700" 
+                    font="kelsonsans" 
+                    width="8">
+                </a-text>
+                
+                <!-- Subtitle -->
+                <a-text 
+                    value="Default AR Marker" 
+                    position="0 0.4 0.02" 
+                    align="center" 
+                    color="#87CEEB" 
+                    font="kelsonsans" 
+                    width="6">
+                </a-text>
+                
+                <!-- Description -->
+                <a-text 
+                    value="This is the classic Hiro marker used for\nAugmented Reality demonstrations.\nIt's widely recognized and reliable." 
+                    position="0 -0.2 0.02" 
+                    align="center" 
+                    color="#FFFFFF" 
+                    font="kelsonsans" 
+                    width="5">
+                </a-text>
+            </a-entity>
+        </a-marker>
+
+        <!-- Marker 2 - Kanji Pattern -->
+        <a-marker type="pattern" url="patterns/01.patt" id="marker-01">
+            <a-entity id="content-kanji" visible="false">
+                <!-- Dark background panel -->
+                <a-plane 
+                    position="0 0 0.01" 
+                    width="4" 
+                    height="2.5" 
+                    color="#1a1a1a" 
+                    opacity="0.9" 
+                    transparent="true">
+                </a-plane>
+                
+                <!-- Title -->
+                <a-text 
+                    value="KANJI MARKER" 
+                    position="0 0.8 0.02" 
+                    align="center" 
+                    color="#FF6B6B" 
+                    font="kelsonsans" 
+                    width="8">
+                </a-text>
+                
+                <!-- Subtitle -->
+                <a-text 
+                    value="Japanese Character Marker" 
+                    position="0 0.4 0.02" 
+                    align="center" 
+                    color="#4ECDC4" 
+                    font="kelsonsans" 
+                    width="6">
+                </a-text>
+                
+                <!-- Description -->
+                <a-text 
+                    value="Features a Japanese Kanji character.\nProvides excellent tracking stability\nfor AR applications." 
+                    position="0 -0.2 0.02" 
+                    align="center" 
+                    color="#FFFFFF" 
+                    font="kelsonsans" 
+                    width="5">
+                </a-text>
+            </a-entity>
+        </a-marker>
+
+        <!-- Custom Marker 3 - Pattern-based -->
+        <a-marker type="pattern" url="patterns/02.patt" id="marker-02">
+            <a-entity id="content-custom1" visible="false">
+                <!-- Dark background panel -->
+                <a-plane 
+                    position="0 0 0.01" 
+                    width="4" 
+                    height="2.5" 
+                    color="#2c2c2c" 
+                    opacity="0.88" 
+                    transparent="true">
+                </a-plane>
+                
+                <!-- Title -->
+                <a-text 
+                    value="CUSTOM MARKER" 
+                    position="0 0.8 0.02" 
+                    align="center" 
+                    color="#9B59B6" 
+                    font="kelsonsans" 
+                    width="8">
+                </a-text>
+                
+                <!-- Subtitle -->
+                <a-text 
+                    value="Personalized Pattern" 
+                    position="0 0.4 0.02" 
+                    align="center" 
+                    color="#F39C12" 
+                    font="kelsonsans" 
+                    width="6">
+                </a-text>
+                
+                <!-- Description -->
+                <a-text 
+                    value="A custom-designed marker pattern\ncreated specifically for your\nAR experience needs." 
+                    position="0 -0.2 0.02" 
+                    align="center" 
+                    color="#FFFFFF" 
+                    font="kelsonsans" 
+                    width="5">
+                </a-text>
+            </a-entity>
+        </a-marker>
+
+        <!-- Barcode Marker -->
+        <a-marker type="pattern" url="patterns/03.patt" id="marker-03">
+            <a-entity id="content-barcode" visible="false">
+                <!-- Dark background panel -->
+                <a-plane 
+                    position="0 0 0.01" 
+                    width="4" 
+                    height="2.5" 
+                    color="#0f0f0f" 
+                    opacity="0.9" 
+                    transparent="true">
+                </a-plane>
+                
+                <!-- Title -->
+                <a-text 
+                    value="BARCODE MARKER" 
+                    position="0 0.8 0.02" 
+                    align="center" 
+                    color="#E74C3C" 
+                    font="kelsonsans" 
+                    width="8">
+                </a-text>
+                
+                <!-- Subtitle -->
+                <a-text 
+                    value="Matrix Code #5" 
+                    position="0 0.4 0.02" 
+                    align="center" 
+                    color="#3498DB" 
+                    font="kelsonsans" 
+                    width="6">
+                </a-text>
+                
+                <!-- Description -->
+                <a-text 
+                    value="Barcode-style marker with ID 5.\nOffers precise tracking and\nfast recognition capabilities." 
+                    position="0 -0.2 0.02" 
+                    align="center" 
+                    color="#FFFFFF" 
+                    font="kelsonsans" 
+                    width="5">
+                </a-text>
+            </a-entity>
+        </a-marker>
+
+        <!-- Camera -->
+        <a-entity camera></a-entity>
+    </a-scene>
+
+    <script>
+        // JavaScript for enhanced marker interaction
+        AFRAME.registerComponent('marker-handler', {
+            init: function() {
+                const marker = this.el;
+                const content = marker.querySelector('a-entity');
+                
+                // Marker found event
+                marker.addEventListener('markerFound', function() {
+                    console.log('Marker found:', marker.id);
+                    if (content) {
+                        content.setAttribute('visible', true);
+                        // Add entrance animation
+                        content.setAttribute('animation', {
+                            property: 'scale',
+                            from: '0 0 0',
+                            to: '1 1 1',
+                            dur: 500,
+                            easing: 'easeOutElastic'
+                        });
+                    }
+                });
+                
+                // Marker lost event
+                marker.addEventListener('markerLost', function() {
+                    console.log('Marker lost:', marker.id);
+                    if (content) {
+                        // Add exit animation
+                        content.setAttribute('animation', {
+                            property: 'scale',
+                            from: '1 1 1',
+                            to: '0 0 0',
+                            dur: 300,
+                            easing: 'easeInQuad'
+                        });
+                        
+                        // Hide after animation
+                        setTimeout(() => {
+                            content.setAttribute('visible', false);
+                        }, 300);
+                    }
+                });
+            }
         });
-        marker.element.addEventListener('markerLost', () => {
-          // Optional: reset text or do nothing
-          // For example, show default message
-          // updateText('Point your camera at a marker to see details.');
+
+        // Apply marker handler to all markers
+        document.addEventListener('DOMContentLoaded', function() {
+            const markers = document.querySelectorAll('a-marker');
+            markers.forEach(marker => {
+                marker.setAttribute('marker-handler', '');
+            });
         });
-      });
-    });
-  </script>
+
+        // Additional utility functions
+        function createDynamicMarkerContent(markerId, title, subtitle, description, colors = {}) {
+            const marker = document.querySelector(`#${markerId}`);
+            if (!marker) return;
+            
+            const content = marker.querySelector('a-entity') || document.createElement('a-entity');
+            content.setAttribute('id', `content-${markerId}`);
+            content.setAttribute('visible', 'false');
+            
+            // Set default colors
+            const titleColor = colors.title || '#FFD700';
+            const subtitleColor = colors.subtitle || '#87CEEB';
+            const descriptionColor = colors.description || '#FFFFFF';
+            const backgroundColor = colors.background || '#000000';
+            
+            content.innerHTML = `
+                <a-plane 
+                    position="0 0 0.01" 
+                    width="4" 
+                    height="2.5" 
+                    color="${backgroundColor}" 
+                    opacity="0.85" 
+                    transparent="true">
+                </a-plane>
+                
+                <a-text 
+                    value="${title}" 
+                    position="0 0.8 0.02" 
+                    align="center" 
+                    color="${titleColor}" 
+                    font="kelsonsans" 
+                    width="8">
+                </a-text>
+                
+                <a-text 
+                    value="${subtitle}" 
+                    position="0 0.4 0.02" 
+                    align="center" 
+                    color="${subtitleColor}" 
+                    font="kelsonsans" 
+                    width="6">
+                </a-text>
+                
+                <a-text 
+                    value="${description}" 
+                    position="0 -0.2 0.02" 
+                    align="center" 
+                    color="${descriptionColor}" 
+                    font="kelsonsans" 
+                    width="5">
+                </a-text>
+            `;
+            
+            if (!marker.contains(content)) {
+                marker.appendChild(content);
+            }
+        }
+
+        // Example of dynamic content creation
+        // Uncomment to use:
+        /*
+        createDynamicMarkerContent(
+            'marker-custom2',
+            'DYNAMIC MARKER',
+            'Created with JavaScript',
+            'This marker content was\\ncreated dynamically using\\nJavaScript functions.',
+            {
+                title: '#00FF00',
+                subtitle: '#FF00FF',
+                description: '#FFFFFF',
+                background: '#333333'
+            }
+        );
+        */
+    </script>
 </body>
 </html>
