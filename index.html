@@ -8,29 +8,28 @@
     <script src="js/aframe.min.js"></script>
     <script src="js/aframe-ar.js"></script>
     <style>
-      body { margin: 0; overflow: hidden; }
-      #arjs-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        #scene {
+            width: 100%;
+            height: 100vh;
+        }
     </style>
 </head>
-<body style="margin: 0; overflow: hidden;">
-    <a-scene embedded arjs>
-
-        <a-assets>
-            <img id="image-one" src="cards/card01.png">
-            <img id="image-two" src="cards/card02.png">
-            <img id="image-three" src="cards/card03.png">
-        </a-assets>
-
+<body>
+    <a-scene id="scene" embedded arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
         <a-marker type="pattern" url="patts/code01.patt">
-            <a-image src="#image-one" position="0 0 0" rotation="-90 0 0" height="1" width="1"></a-image>
+            <a-image src="cards/card01.png" position="0 0 0" rotation="-90 0 0" height="1" width="1"></a-image>
         </a-marker>
 
         <a-marker type="pattern" url="patts/code02.patt">
-            <a-image src="#image-two" position="0 0 0" rotation="-90 0 0" height="1" width="1"></a-image>
+            <a-image src="cards/card02.png" position="0 0 0" rotation="-90 0 0" height="1" width="1"></a-image>
         </a-marker>
 
         <a-marker type="pattern" url="patts/code03.patt">
-            <a-image src="#image-three" position="0 0 0" rotation="-90 0 0" height="1" width="1"></a-image>
+            <a-image src="cards/card03.png" position="0 0 0" rotation="-90 0 0" height="1" width="1"></a-image>
         </a-marker>
         
         <a-entity camera></a-entity>
