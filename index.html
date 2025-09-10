@@ -7,65 +7,50 @@
     <!-- A-Frame and AR.js libraries -->
     <script src="js/aframe.min.js"></script>
     <script src="js/aframe-ar.js"></script>
-    <script src="ar-pattern-loader.js"></script>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        
-        #loading {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.8);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            z-index: 1000;
-        }
-        
-        #info {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 12px;
-            z-index: 999;
-        }
-    </style>
-</head>
-<body>
-    <!-- Loading indicator -->
-    <div id="loading">Loading AR patterns...</div>
+<body style="margin: 0;">
     
-    <!-- Info panel -->
-    <div id="info">
-        <div>Patterns loaded: <span id="pattern-count">0</span></div>
-        <div>Active patterns: <span id="active-count">0</span></div>
-    </div>
-
-    <!-- A-Frame AR Scene -->
     <a-scene
         embedded
-        arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
-        vr-mode-ui="enabled: false"
-        renderer="logarithmicDepthBuffer: true;"
-        loading-screen="enabled: false">
+        arjs="sourceType: webcam; debugUIEnabled: false;"
+        vr-mode-ui="enabled: false">
         
-        <!-- Assets -->
-        <a-assets>
-            <!-- Images will be dynamically loaded here -->
-        </a-assets>
+        <!-- Just add more markers like this for each pattern -->
+        
+        <a-marker type="pattern" url="patts/code01.patt">
+            <a-plane 
+                src="cards/card01.png"  
+                position="0 0 0" 
+                rotation="-90 0 0" 
+                width="1.5" 
+                height="1.5"
+                transparent="true">
+            </a-plane>
+        </a-marker>
 
-        <!-- Camera -->
+        <a-marker type="pattern" url="patts/code02.patt">
+            <a-plane 
+                src="cards/card02.png" 
+                position="0 0.5 0" 
+                rotation="-90 0 0" 
+                width="1.5" 
+                height="1.5"
+                transparent="true">
+            </a-plane>
+        </a-marker>
+
+        <a-marker type="pattern" url="patts/code03.patt">
+            <a-plane 
+                src="cards/card03.png" 
+                position="0 1 0" 
+                rotation="-90 0 0" 
+                width="1.5" 
+                height="1.5"
+                transparent="true">
+            </a-plane>
+        </a-marker>
+
         <a-camera-static />
     </a-scene>
 
-    <script src="ar-pattern-loader.js"></script>
 </body>
 </html>
