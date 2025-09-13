@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
@@ -10,35 +11,112 @@
     <script src="js/gesture-detector.js"></script>
     <script src="js/gesture-handler.js"></script>
 </head>
- <body style="margin: 0; overflow: hidden;">
-        <a-scene
-            vr-mode-ui="enabled: false;"
-            loading-screen="enabled: false;"
-            arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
-            id="scene"
-            embedded
-            gesture-detector
-        >
-            <a-marker
-                id="animated-marker"
-                type="pattern"
-                preset="custom"
-                url="patts/code01.patt"
-                raycaster="objects: .clickable"
-                emitevents="true"
-                cursor="fuse: false; rayOrigin: mouse;"
-                id="markerA"
-            >
-                <a-image
-                    src="cards/card01.png"
-                    scale="1 1 1"
-                    class="clickable"
-                    rotation="-90 0 0"
-                    gesture-handler
-                ></a-image>
-            </a-marker>
 
-            <a-entity camera></a-entity>
-        </a-scene>
-    </body>
+<body style="margin: 0; overflow: hidden;">
+    <a-scene vr-mode-ui="enabled: false;" loading-screen="enabled: false;" arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;" id="scene" embedded gesture-detector>
+    
+        <!-- Marker-00 / Card-00 -->
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="patts/code00.patt" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="marker00">
+            <a-image src="cards/card00.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+        </a-marker>
+        
+        <!-- Marker-01 / Card-01 -->
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="patts/code01.patt" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="marker01">
+            <a-image src="cards/card01.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+        </a-marker>
+        
+        <!-- Marker-02 / Card-02 -->
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="patts/code02.patt" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="marker02">
+            <a-image src="cards/card02.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+        </a-marker>
+        
+        <!-- Marker-03 / Card-03 -->
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="patts/code03.patt" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="marker03">
+            <a-image src="cards/card03.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+        </a-marker>
+        
+        <!-- Marker-04 / Card-04 -->
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="patts/code04.patt" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="marker04">
+            <a-image src="cards/card04.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+        </a-marker>
+        
+        <!-- Marker-05 / Card-05 -->
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="patts/code05.patt" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="marker05">
+            <a-image src="cards/card05.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+        </a-marker>
+        
+        <!-- Marker-06 / Card-06 -->
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="patts/code06.patt" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="marker06">
+            <a-image src="cards/card06.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+        </a-marker>
+        
+        <!-- Marker-07 / Card-07 -->
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="patts/code07.patt" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="marker07">
+            <a-image src="cards/card07.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+        </a-marker>
+        
+        <!-- Marker-08 / Card-08 -->
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="patts/code08.patt" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="marker08">
+            <a-image src="cards/card08.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+        </a-marker>
+        
+        <!-- Marker-09 / Card-09 -->
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="patts/code09.patt" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="marker09">
+            <a-image src="cards/card09.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+        </a-marker>
+        
+        <!-- Marker-10 / Card-10 -->
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="patts/code10.patt" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="marker10">
+            <a-image src="cards/card10.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+        </a-marker>
+        
+        <!-- Marker-11 / Card-11 -->
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="patts/code11.patt" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="marker11">
+            <a-image src="cards/card11.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+        </a-marker>
+        
+        <!-- Marker-12 / Card-12 -->
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="patts/code12.patt" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="marker12">
+            <a-image src="cards/card12.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+        </a-marker>
+        
+        <!-- Marker-13 / Card-13 -->
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="patts/code13.patt" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="marker13">
+            <a-image src="cards/card13.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+        </a-marker>
+        
+        <!-- Marker-14 / Card-14 -->
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="patts/code14.patt" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="marker14">
+            <a-image src="cards/card14.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+        </a-marker>
+        
+        <!-- Marker-15 / Card-15 -->
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="patts/code15.patt" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="marker15">
+            <a-image src="cards/card15.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+        </a-marker>
+        
+        <!-- Marker-16 / Card-16 -->
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="patts/code16.patt" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="marker16">
+            <a-image src="cards/card16.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+        </a-marker>
+        
+        <!-- Marker-17 / Card-17 -->
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="patts/code17.patt" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="marker17">
+            <a-image src="cards/card17.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+        </a-marker>
+        
+        <!-- Marker-18 / Card-18 -->
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="patts/code18.patt" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="marker18">
+            <a-image src="cards/card18.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+        </a-marker>
+        
+        <!-- Marker-19 / Card-19 -->
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="patts/code19.patt" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="marker19">
+            <a-image src="cards/card19.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+        </a-marker>
+
+        <a-entity camera></a-entity>
+    </a-scene>
+</body>
+
 </html>
